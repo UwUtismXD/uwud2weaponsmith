@@ -1,0 +1,5 @@
+{
+  "buildCommand": "node index.js && node build-web-data.js",
+  "outputDirectory": "web",
+  "installCommand": "node --version"
+}

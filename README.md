@@ -28,6 +28,17 @@ The first run downloads the manifest definition tables (~170 MB) into
 `manifest-cache/` and reuses them on later runs. Delete that folder to force a
 fresh download when Bungie ships a new manifest version.
 
+## Deploy to Vercel
+
+1. Go to [vercel.com](https://vercel.com) → **Add New Project** → import `uwud2weaponsmith` from GitHub.
+2. Before deploying, add an **Environment Variable** in the Vercel project settings:
+   - Name: `BUNGIE_API_KEY`
+   - Value: your Bungie API key
+3. Deploy — Vercel runs `node index.js && node build-web-data.js` as the build step,
+   downloads the live manifest, and serves the `web/` folder as a static site.
+
+Every new push to `master` triggers a fresh deploy with up-to-date weapon data.
+
 ## Web UI
 
 A browser UI to explore the data — search/filter weapons and click one to see
