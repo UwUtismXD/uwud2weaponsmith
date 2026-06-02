@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ARSENAL // Destiny 2 Weapon Codex</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Barlow:ital,wght@0,400;0,500;0,600;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="grain"></div>
+
+    <aside id="sidebar">
+      <header class="rail-head">
+        <div class="brand">
+          <span class="brand-mark">◆</span>
+          <div>
+            <h1>ARSENAL</h1>
+            <p id="meta">loading codex…</p>
+          </div>
+        </div>
+
+        <div class="search-wrap">
+          <span class="search-ico">⌕</span>
+          <input id="search" type="search" placeholder="Search weapons…" autocomplete="off" />
+        </div>
+
+        <div class="filters">
+          <select id="filter-type"><option value="">All types</option></select>
+          <select id="filter-tier"><option value="">All tiers</option></select>
+          <select id="filter-damage"><option value="">All elements</option></select>
+        </div>
+        <div id="count" class="count"></div>
+      </header>
+
+      <ul id="weapon-list"></ul>
+    </aside>
+
+    <main id="detail">
+      <div class="empty">
+        <span class="empty-mark">◆</span>
+        <p>Select a weapon to inspect every perk it can roll.</p>
+      </div>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,6 @@
+node_modules/
+apikey.txt
+manifest-cache/
+weapons.json
+web/data.json
+.claude/
