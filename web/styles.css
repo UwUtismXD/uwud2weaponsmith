@@ -94,6 +94,27 @@ body {
 }
 .brand p { margin: 2px 0 0; font-size: 11px; color: var(--muted); letter-spacing: 0.5px; }
 
+/* view tabs */
+.tabs {
+  display: flex; gap: 4px; margin-bottom: 14px;
+  padding: 4px; border-radius: 6px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--line-strong);
+}
+.tab {
+  flex: 1; padding: 8px 10px;
+  background: transparent; border: 0; border-radius: 4px;
+  color: var(--muted); cursor: pointer;
+  font-family: "Chakra Petch", sans-serif;
+  font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+  transition: background 0.16s, color 0.16s;
+}
+.tab:hover { color: var(--text); }
+.tab.active {
+  background: var(--accent-soft); color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent-line);
+}
+
 .search-wrap { position: relative; }
 .search-ico {
   position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
@@ -132,6 +153,35 @@ body {
   cursor: pointer;
 }
 .filters select:focus { outline: none; border-color: var(--accent-line); color: var(--text); }
+
+/* enhanced-perks toggle */
+.switch-row {
+  display: flex; align-items: center; gap: 9px;
+  margin-top: 10px; cursor: pointer; user-select: none;
+}
+.switch-row input { position: absolute; opacity: 0; pointer-events: none; }
+.switch {
+  position: relative; width: 34px; height: 18px; flex-shrink: 0;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--line-strong); border-radius: 20px;
+  transition: background 0.16s, border-color 0.16s;
+}
+.switch::after {
+  content: ""; position: absolute; top: 2px; left: 2px;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--dim);
+  transition: transform 0.16s, background 0.16s;
+}
+.switch-row input:checked + .switch {
+  background: var(--accent-soft); border-color: var(--accent-line);
+}
+.switch-row input:checked + .switch::after { transform: translateX(16px); background: var(--accent); }
+.switch-row input:focus-visible + .switch { box-shadow: 0 0 0 3px var(--accent-soft); }
+.switch-label {
+  font-family: "Chakra Petch", sans-serif;
+  font-size: 11px; letter-spacing: 0.5px; color: var(--muted);
+}
+.switch-row input:checked ~ .switch-label { color: var(--text); }
 
 .count {
   margin-top: 12px;
@@ -328,6 +378,169 @@ body {
 }
 .col-toggle:hover { border-color: var(--accent-line); color: var(--accent); }
 
+/* ============================ FORGE ============================ */
+.forge { padding: 28px 44px 60px; display: flex; flex-direction: column; gap: 28px; }
+
+/* your-roll summary */
+.roll {
+  position: sticky; top: 0; z-index: 5;
+  background: linear-gradient(180deg, rgba(12, 16, 24, 0.96), rgba(12, 16, 24, 0.82));
+  border: 1px solid var(--accent-line);
+  border-radius: 12px;
+  padding: 16px 18px;
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow);
+}
+.roll-head {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; margin-bottom: 14px; flex-wrap: wrap;
+}
+.roll-head h3 {
+  margin: 0;
+  font-family: "Chakra Petch", sans-serif;
+  font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent);
+}
+.roll-actions { display: flex; gap: 8px; }
+.rbtn {
+  padding: 7px 13px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--line-strong); border-radius: 5px;
+  color: var(--muted); cursor: pointer;
+  font-family: "Chakra Petch", sans-serif;
+  font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
+  transition: border-color 0.14s, color 0.14s, background 0.14s;
+}
+.rbtn:hover { border-color: var(--accent-line); color: var(--text); }
+.rbtn.primary { background: var(--accent-soft); border-color: var(--accent-line); color: var(--accent); }
+
+.roll-grid {
+  display: grid; gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+}
+.roll-item { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.ri-node {
+  width: 40px; height: 40px; flex-shrink: 0;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid var(--accent-line);
+  box-shadow: 0 0 12px -3px var(--elem-glow);
+  color: var(--dim); font-size: 16px;
+}
+.roll-item.empty .ri-node { border-color: var(--line); box-shadow: none; }
+.ri-node img { width: 32px; height: 32px; }
+.ri-text { display: flex; flex-direction: column; min-width: 0; }
+.ri-col {
+  font-family: "Chakra Petch", sans-serif;
+  font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--dim);
+}
+.ri-name {
+  font-family: "Chakra Petch", sans-serif;
+  font-size: 13px; font-weight: 500; letter-spacing: 0.2px; color: var(--text);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+/* perk picker columns */
+.forge-cols { display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; }
+.forge-col {
+  flex: 1 1 210px; min-width: 200px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px;
+  backdrop-filter: blur(6px);
+  box-shadow: var(--shadow);
+}
+
+.forge-perks { display: flex; flex-direction: column; gap: 4px; }
+.forge-perk {
+  display: flex; align-items: center; gap: 11px; width: 100%; text-align: left;
+  padding: 7px 8px; border-radius: 8px; cursor: pointer;
+  background: transparent; border: 1px solid transparent;
+  color: var(--text);
+  transition: background 0.13s, border-color 0.13s;
+}
+.forge-perk:hover { background: rgba(255, 255, 255, 0.04); }
+.forge-perk.cant { opacity: 0.4; }
+.forge-perk.cant:hover { opacity: 0.7; }
+.forge-perk.selected {
+  background: var(--accent-soft);
+  border-color: var(--accent-line);
+}
+.fp-node {
+  position: relative; width: 38px; height: 38px; flex-shrink: 0;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid var(--line-strong);
+  display: grid; place-items: center;
+  transition: border-color 0.14s, box-shadow 0.14s;
+}
+.forge-perk.selected .fp-node { border-color: var(--accent); box-shadow: 0 0 14px -2px var(--elem-glow); }
+.fp-node img { width: 30px; height: 30px; }
+.fp-text { display: flex; flex-direction: column; min-width: 0; }
+.fp-name { font-family: "Chakra Petch", sans-serif; font-size: 13px; font-weight: 500; letter-spacing: 0.2px; }
+.fp-meta { font-size: 9px; letter-spacing: 0.5px; text-transform: uppercase; color: #c66; margin-top: 2px; }
+.forge-col.single .forge-perk { cursor: default; }
+
+/* ---- enhanced perks: fixed golden tint (independent of element accent) ---- */
+:root { --gold: #f3c44b; --gold-soft: rgba(243, 196, 75, 0.12); --gold-line: rgba(243, 196, 75, 0.5); }
+
+/* codex */
+.perk.enhanced .perk-name { color: var(--gold); }
+.perk.enhanced .perk-node { border-color: var(--gold-line); box-shadow: 0 0 12px -4px rgba(243, 196, 75, 0.55); }
+.perk.enhanced:hover .perk-node { border-color: var(--gold); box-shadow: 0 0 14px -2px rgba(243, 196, 75, 0.6); }
+
+/* forge picker */
+.forge-perk.enhanced { background: rgba(243, 196, 75, 0.04); }
+.forge-perk.enhanced .fp-name { color: var(--gold); }
+.forge-perk.enhanced .fp-node { border-color: var(--gold-line); box-shadow: 0 0 11px -4px rgba(243, 196, 75, 0.5); }
+.forge-perk.enhanced:hover { background: rgba(243, 196, 75, 0.08); }
+.forge-perk.enhanced.selected { background: var(--gold-soft); border-color: var(--gold-line); }
+.forge-perk.enhanced.selected .fp-node { border-color: var(--gold); box-shadow: 0 0 14px -2px rgba(243, 196, 75, 0.6); }
+
+/* roll summary */
+.roll-item.enhanced .ri-name { color: var(--gold); }
+.roll-item.enhanced .ri-node { border-color: var(--gold-line); box-shadow: 0 0 12px -3px rgba(243, 196, 75, 0.55); }
+
+/* ============================ STATS ============================ */
+.stats-section .group-label { margin-bottom: 12px; }
+.stat-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 7px 28px;
+  max-width: 900px;
+}
+.stat-row { display: flex; align-items: center; gap: 12px; }
+.stat-name {
+  flex: 0 0 138px;
+  font-family: "Chakra Petch", sans-serif;
+  font-size: 12px; letter-spacing: 0.4px; color: var(--muted);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: right;
+}
+.stat-bar {
+  flex: 1; height: 7px; min-width: 40px;
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 4px; overflow: hidden;
+}
+.stat-fill {
+  display: block; height: 100%;
+  background: var(--accent);
+  border-radius: 4px;
+  transition: width 0.28s cubic-bezier(.4, 0, .2, 1), background 0.2s;
+}
+.stat-fill.up { background: #56d364; }
+.stat-fill.down { background: #e5604d; }
+.stat-row.num .stat-bar { background: transparent; } /* RPM/Mag/etc: number, no bar */
+.stat-val {
+  flex: 0 0 auto; min-width: 40px;
+  display: inline-flex; align-items: baseline; gap: 6px;
+  font-family: "Chakra Petch", sans-serif;
+  font-size: 13px; font-weight: 600; color: var(--text);
+}
+.stat-delta { font-size: 10px; font-weight: 600; }
+.stat-delta.up { color: #56d364; }
+.stat-delta.down { color: #e5604d; }
+
 /* scrollbars */
 #weapon-list::-webkit-scrollbar, #detail::-webkit-scrollbar { width: 10px; }
 #weapon-list::-webkit-scrollbar-thumb, #detail::-webkit-scrollbar-thumb {
@@ -338,5 +551,5 @@ body {
 @media (max-width: 900px) {
   #sidebar { width: 300px; min-width: 300px; }
   .hero h2 { font-size: 30px; }
-  .sockets, .hero { padding-left: 22px; padding-right: 22px; }
+  .sockets, .hero, .forge { padding-left: 22px; padding-right: 22px; }
 }

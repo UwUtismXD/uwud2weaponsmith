@@ -25,6 +25,11 @@
           </div>
         </div>
 
+        <nav class="tabs" id="tabs">
+          <button class="tab active" data-mode="codex" type="button">Codex</button>
+          <button class="tab" data-mode="forge" type="button">Forge</button>
+        </nav>
+
         <div class="search-wrap">
           <span class="search-ico">⌕</span>
           <input id="search" type="search" placeholder="Search weapons…" autocomplete="off" />
@@ -35,18 +40,20 @@
           <select id="filter-tier"><option value="">All tiers</option></select>
           <select id="filter-damage"><option value="">All elements</option></select>
         </div>
+
+        <label class="switch-row">
+          <input type="checkbox" id="toggle-enhanced" />
+          <span class="switch"></span>
+          <span class="switch-label">Use enhanced perks</span>
+        </label>
+
         <div id="count" class="count"></div>
       </header>
 
       <ul id="weapon-list"></ul>
     </aside>
 
-    <main id="detail">
-      <div class="empty">
-        <span class="empty-mark">◆</span>
-        <p>Select a weapon to inspect every perk it can roll.</p>
-      </div>
-    </main>
+    <main id="detail"></main>
 
     <script src="app.js"></script>
   </body>

@@ -30,6 +30,7 @@ function registerPerk(p) {
       itemType: p.itemType,
       plugCategory: p.plugCategory,
       icon: p.icon,
+      ...(p.stats ? { stats: p.stats } : {}), // unconditional stat modifiers
     };
   }
 }
@@ -45,6 +46,8 @@ const weapons = data.weapons.map((w) => ({
   icon: w.icon,
   screenshot: w.screenshot,
   watermark: w.watermark,
+  statGroup: w.statGroup,
+  baseStats: w.baseStats,
   sockets: w.sockets.map((s) => {
     s.perks.forEach(registerPerk);
     return {
@@ -61,6 +64,8 @@ const output = {
   manifestVersion: data.manifestVersion,
   weaponCount: weapons.length,
   perkCount: Object.keys(perks).length,
+  statNames: data.statNames || {},
+  statGroups: data.statGroups || {},
   perks,
   weapons,
 };
