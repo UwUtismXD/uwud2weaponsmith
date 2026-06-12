@@ -1,6 +1,6 @@
 {
   "name": "destiny-weapons",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Downloads all Destiny 2 weapons and their possible perks from the Bungie API into a JSON file.",
   "type": "module",
   "main": "index.js",
